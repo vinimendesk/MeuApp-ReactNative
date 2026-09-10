@@ -5,6 +5,8 @@ import { useColorScheme } from 'react-native';
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
 import AppTabs from '@/components/app-tabs';
 
+import { Stack } from 'expo-router';
+
 SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
@@ -12,7 +14,10 @@ export default function TabLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <AnimatedSplashOverlay />
-      <AppTabs />
+      <Stack>
+        <Stack.Screen name="index" options={{title: 'Home'}} />
+        <Stack.Screen name="produtos" options={{title: 'Produtos'}} />
+      </Stack>
     </ThemeProvider>
   );
 }

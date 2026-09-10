@@ -1,5 +1,5 @@
 import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AnimatedIcon } from '@/components/animated-icon';
@@ -8,6 +8,10 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+
+import {Text, View, Button, Alert} from 'react-native';
+import { Color, router } from 'expo-router';
+import { Stack } from 'expo-router';
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -28,33 +32,26 @@ function getDevMenuHint() {
   );
 }
 
+/*export default function RootLayout() {
+  return (
+    <Stack>
+
+    </Stack>
+  );
+}*/
+
 export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
+        <ThemedView style={styles.helloWorld}>
+          <Text style={{color: 'white', paddingBottom: 16}}>Insira os seus dados</Text>
+          <TextInput style={{color: 'white'}} placeholder = "Nome"></TextInput>
+          <Button title="Realizar Cadastro" onPress={()=> {if (Platform.OS == 'web') {window.alert('Impossível Cadastrar Usuário')} else {Alert.alert('Impossível Cadastrar Usuário')}}}></Button>
+          <Button title="Go to ProductScreen" onPress={()=>router.push('/produtos')}></Button>
         </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
         </ThemedView>
-
         {Platform.OS === 'web' && <WebBadge />}
       </SafeAreaView>
     </ThemedView>
@@ -95,4 +92,9 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.four,
     borderRadius: Spacing.four,
   },
+  helloWorld: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
