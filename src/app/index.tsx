@@ -50,6 +50,7 @@ export default function HomeScreen() {
           <TextInput style={{color: 'white'}} placeholder = "Nome"></TextInput>
           <Button title="Realizar Cadastro" onPress={()=> {if (Platform.OS == 'web') {window.alert('Impossível Cadastrar Usuário')} else {Alert.alert('Impossível Cadastrar Usuário')}}}></Button>
           <Button title="Go to ProductScreen" onPress={()=>router.push('/produtos')}></Button>
+          <Button title="Go to DetalhesScreen" onPress={()=>router.push('/detalhes')}></Button>
         </ThemedView>
         </ThemedView>
         {Platform.OS === 'web' && <WebBadge />}
